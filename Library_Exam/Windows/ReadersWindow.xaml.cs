@@ -38,7 +38,11 @@ namespace Library_Exam.Windows
         {
             ReaderCard reader = new ReaderCard();
 
-            if ((surtex.Text.Trim() != null) || (nametex.Text.Trim() != null) || (pattex.Text.Trim() != null) || (addrestex.Text.Trim() != null) || (phonetex.Text.Trim() != null))
+            if ((surtex.Text == null) || (nametex.Text == null) || (pattex.Text == null) || (addrestex.Text == null) || (phonetex.Text == null))
+            {
+                MessageBox.Show("Заполните все поля");
+            }
+            else
             {
                 reader.Id = 2;
                 reader.Surname = surtex.Text.Trim();
@@ -50,24 +54,22 @@ namespace Library_Exam.Windows
                 librarydb.ReaderCard.Add(reader);
                 librarydb.SaveChanges();
             }
-            else
-            {
-                MessageBox.Show("Заполните все поля");
-            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             var zxc = lstread.SelectedItem as ReaderCard;
+            if ((surtex.Text.Trim() != null) || (nametex.Text.Trim() != null) || (pattex.Text.Trim() != null) || (addrestex.Text.Trim() != null) || (phonetex.Text.Trim() != null))
+            {
+                zxc.FirstName = nametex.Text.ToString();
+                zxc.Surname = surtex.Text.ToString();
+                zxc.Patronymic = pattex.Text.ToString();
+                zxc.Address = addrestex.Text.ToString();
+                zxc.Phone = phonetex.Text.ToString();
 
-            zxc.FirstName = nametex.Text.ToString();
-            zxc.Surname = surtex.Text.ToString();
-            zxc.Patronymic = pattex.Text.ToString();
-            zxc.Address = addrestex.Text.ToString();
-            zxc.Phone = phonetex.Text.ToString();
-
-            librarydb.SaveChanges();
-            MessageBox.Show("Данные о читателе редактированы");
+                librarydb.SaveChanges();
+                MessageBox.Show("Данные о читателе редактированы");
+            }
         }
 
         private void lstread_SelectionChanged(object sender, SelectionChangedEventArgs e)
